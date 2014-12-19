@@ -26,4 +26,14 @@ public class Choix extends Model {
 
     @ManyToMany
     private List<Vote> votes;
+    
+    public Long getId()
+    {
+    	return this.id;
+    }
+    
+    public String getName()
+    {
+    	return this.name;
+    }
 }
