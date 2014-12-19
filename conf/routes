@@ -3,12 +3,14 @@
 # ~~~~
 
 # Home page
+
 GET         /                    controllers.Application.showPollCreator()
 GET         /creator             controllers.Application.showPollCreator()
 POST        /creator             controllers.Application.saveNewPoll()
 GET         /poll/:qid           controllers.Application.showVoteInterface(qid)
 
 GET         /vote/:qid           controllers.Application.voteForQuestion(qid)
+
 
 
 # Map static resources from the /public folder to the /assets URL path

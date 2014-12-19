@@ -15,7 +15,7 @@ public class Application extends Controller {
 
         String choixString = boundForm.data().get("choix");
         String[] choixList = choixString.split(System.getProperty("line.separator"));
-        
+
         Question q = boundForm.get();
         return redirect(showVoteInterface(q.find.getId()));
     }
