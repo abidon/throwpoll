@@ -14,26 +14,22 @@ import java.util.List;
  */
 @Entity
 public class Choix extends Model {
-
+    public static Finder<Long, Choix> find = new Finder<Long, Choix>(Long.class, Choix.class);
     @Id
-    private Long id;
+    public Long id;
 
-    @Constraints.Required
-    private String name;
+
+    public String name;
 
     @ManyToOne
-    private Question question;
+    public Question question;
 
     @ManyToMany
-    private List<Vote> votes;
-    
-    public Long getId()
-    {
-    	return this.id;
+    public List<Vote> votes;
+
+    public Choix(String name){
+        this.name = name;
     }
-    
-    public String getName()
-    {
-    	return this.name;
-    }
+
+
 }

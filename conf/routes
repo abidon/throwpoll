@@ -7,9 +7,9 @@
 GET         /                    controllers.Application.showPollCreator()
 GET         /creator             controllers.Application.showPollCreator()
 POST        /creator             controllers.Application.saveNewPoll()
-GET         /poll/:qid           controllers.Application.showVoteInterface(qid)
+GET         /poll/:qid           controllers.Application.showVoteInterface(qid : Long)
 
-GET         /vote/:qid           controllers.Application.voteForQuestion(qid)
+GET         /vote/:qid           controllers.Application.voteForQuestion(qid : Long)
 
 
 

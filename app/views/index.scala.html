@@ -1,7 +1,6 @@
-@(questionForm: Form[Question])
+@(questionForm: Form[assets.QuestionForm])
 
 @import helper._
-@import helper.twitterBootstrap._
 
 @main("ThrowPoll 0.1") {
 
@@ -12,7 +11,7 @@
 
         @helper.checkbox(questionForm("multiple"))
 
-        <input type="submit" class="btn" value="Publier"/>
+        <input type="submit" value="Publier"/>
     }
 
 

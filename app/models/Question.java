@@ -4,6 +4,7 @@ package models;
  * Created by Timote on 19/12/14.
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,7 +15,9 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
+import play.data.Form;
 import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
 import play.db.ebean.Model;
 
 @Entity
@@ -23,36 +26,19 @@ public class Question extends Model {
 	public static Finder<Long, Question> find = new Finder<Long, Question>(Long.class, Question.class);
 	
     @Id
-    private Long id;
+    public Long id;
 
     @Constraints.Required
-    @NotNull
-    private String name;
+    public String name;
 
-    @Constraints.Required
-    @NotNull
     @OneToMany(mappedBy = "question")
-    private List<Choix> choixList;
+    public List<Choix> choixList = new ArrayList<Choix>();
 
-    @Constraints.Required
-    @NotNull
-    private boolean multiple;
 
-    public Question(String name, List<Choix> choixList, boolean multiple) {
-        this.multiple = multiple;
-        this.name = name;
-        this.choixList = choixList;
-    }
-    
-    public String getName() {
-    	return this.name;
-    }
-    
-    public List<Choix> getChoixList() {
-    	return this.choixList;
-    }
-    
-    public boolean isMultiple() {
-    	return this.multiple;
-    }
+    public boolean multiple;
+
+
+
+
+
 }
