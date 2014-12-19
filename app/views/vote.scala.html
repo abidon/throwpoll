@@ -1,0 +1,40 @@
+@(question : Question)
+
+@main("Vote") {
+	@if(question == null) {
+		<p style="color: red">La question n'a pas pu être trouvée</p>	
+	}
+	
+	<h1>@question.getName()</h1>
+	<form action="#" id="vote">
+	@for(choix <- question.getChoixList()){
+		@if(question.isMultiple()) {
+			<input name="choosen" type="checkbox" value="@choix.getId()">@choix.getName()<br/>
+		} else {
+			<input name="choosen" type="radio" value="@choix.getId()">@choix.getName()<br/>
+		}
+	}
+	<input name="choosen" type="checkbox" value="1">Oui<br/>
+	<input name="choosen" type="checkbox" value="2">Non<br/>
+	<input name="choosen" type="checkbox" value="3">Obi-Wan Kenobi<br/>
+	<input name="choosen" type="checkbox" value="4">La réponse D<br/>
+	
+		<input type="submit" value="Voter!">
+	</form>
+	
+	<script type="text/javascript">
+		$(function() {
+			$("form#vote").on('submit', function(event) {
+				var votes = [];
+				$("form#vote input:checked").each(function() {
+					votes.push($(this).next().val());
+				});
+				if (votes.length == 0)
+				{
+					alert("T'as pas encore voté connard!");
+					event.preventDefault();
+				}
+			});
+		});
+	</script>
+}

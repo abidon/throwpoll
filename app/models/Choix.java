@@ -26,6 +26,11 @@ public class Choix extends Model {
 
     @ManyToMany
     private List<Vote> votes;
+
+    public Choix(String name)
+    {
+    	this.name = name;
+    }
     
     public Long getId()
     {
@@ -35,5 +40,10 @@ public class Choix extends Model {
     public String getName()
     {
     	return this.name;
+    }
+    
+    public void setQuestion(Question question)
+    {
+    	this.question = question;
     }
 }

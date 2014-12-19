@@ -4,6 +4,7 @@ package models;
  * Created by Timote on 19/12/14.
  */
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -35,6 +36,12 @@ public class Question extends Model {
         this.multiple = multiple;
         this.name = name;
         this.choixList = choixList;
+        
+        Iterator<Choix> it = choixList.iterator();
+		while (it.hasNext())
+		{
+			it.next().setQuestion(this);
+		}
     }
     
     public String getName() {
