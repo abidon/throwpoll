@@ -1,0 +1,19 @@
+@(questionForm: Form[Question])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("ThrowPoll 0.1") {
+
+    @helper.form(action = routes.Application.saveNewPoll()){
+        @helper.inputText(questionForm("name"))
+
+        @helper.textarea(questionForm("choix"))
+
+        @helper.checkbox(questionForm("multiple"))
+
+        <input type="submit" class="btn" value="Publier"/>
+    }
+
+
+}

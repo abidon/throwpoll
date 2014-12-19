@@ -11,6 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
+
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -23,13 +27,16 @@ public class Question extends Model {
     private Long id;
 
     @Constraints.Required
+    @NotNull
     private String name;
 
     @Constraints.Required
+    @NotNull
     @OneToMany(mappedBy = "question")
     private List<Choix> choixList;
 
     @Constraints.Required
+    @NotNull
     private boolean multiple;
 
     public Question(String name, List<Choix> choixList, boolean multiple) {
