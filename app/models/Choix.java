@@ -31,5 +31,20 @@ public class Choix extends Model {
         this.name = name;
     }
 
+    
+    public Long getId()
+    {
+    	return this.id;
+    }
+    
+    public String getName()
+    {
+    	return this.name;
+    }
+    
+    public void setQuestion(Question question)
+    {
+    	this.question = question;
+    }
 
 }

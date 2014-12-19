@@ -1,6 +1,7 @@
 package assets;
 
 import models.Choix;
+import models.Question;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
@@ -49,6 +50,10 @@ public class QuestionForm {
 
         if (errors.size() > 0){
             return errors;
+        }
+        else{
+            Question q = new Question(name, createdChoix, multiple);
+            q.save();
         }
 
         return null;

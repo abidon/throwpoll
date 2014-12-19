@@ -5,6 +5,8 @@ package models;
  */
 
 import java.util.ArrayList;
+
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -37,8 +39,31 @@ public class Question extends Model {
 
     public boolean multiple;
 
+    public Question(){
+        // keep empty
+    }
 
+    public Question(String name, List<Choix> choixList, boolean multiple){
+        this.name = name;
+        this.choixList = choixList;
+        this.multiple = multiple;
+    }
 
+    public String getName() {
+    	return this.name;
+    }
+    
+    public List<Choix> getChoixList() {
+    	return this.choixList;
+    }
+    
+    public boolean isMultiple() {
+    	return this.multiple;
+    }
 
+    public static Question getLast(){
+        int rowcount = find.findRowCount();
+        return find.all().get(rowcount - 1);
+    }
 
 }

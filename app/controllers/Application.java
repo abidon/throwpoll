@@ -20,16 +20,25 @@ public class Application extends Controller {
         Form<QuestionForm> boundForm = questionForm.bindFromRequest();
         System.out.println(boundForm);
         QuestionForm q = boundForm.get();
-        System.out.println(q);
-        return showVoteInterface(0L);
+        // get last question id
+        Question last = Question.getLast();
+
+        return redirect(routes.Application.showVoteInterface(last.id));
     }
     
     public static Result showPollCreator() {
         return ok(index.render(questionForm)) ;
     }
-    
+
+
     public static Result showVoteInterface(Long qid) {
-    	return ok();
+    	Question q = Question.find.byId(qid);
+    	if (q == null)
+    	{
+    		flash("error", "La question demandée n'existe pas");
+    	}
+    	return ok(views.html.vote.render(q));
+
     }
     
     public static Result voteForQuestion(Long qid) {

@@ -1,3 +1,4 @@
+
 import com.avaje.ebean.Ebean;
 import models.Choix;
 import models.Question;
@@ -9,13 +10,13 @@ import play.GlobalSettings;
  */
 public class Global extends GlobalSettings {
 
-    @Override
-    public void onStart(Application app){
-        if(Question.find.findRowCount() > 0){
-            Ebean.delete(Question.find.all());
-        }
-        if(Choix.find.findRowCount() > 0){
-            Ebean.delete(Choix.find.all());
-        }
-    }
+	@Override
+	public void onStart(Application app) {
+		if (Question.find.findRowCount() > 0) {
+			Ebean.delete(Question.find.all());
+		}
+		if (Choix.find.findRowCount() > 0) {
+			Ebean.delete(Choix.find.all());
+		}
+	}
 }
