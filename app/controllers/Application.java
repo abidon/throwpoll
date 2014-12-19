@@ -7,6 +7,8 @@ import utils.QuestionForm;
 
 import views.html.*;
 
+import java.util.Map;
+
 public class Application extends Controller {
     private static final Form<QuestionForm> questionForm = Form.form(QuestionForm.class);
 
@@ -36,7 +38,19 @@ public class Application extends Controller {
     }
     
     public static Result voteForQuestion(Long qid) {
-    	return ok();
+        final Map<String, String[]> values = request().body().asFormUrlEncoded();
+
+        for(String s: values.get("choosen")){
+            System.out.println(s);
+            // validate choix
+            // create Vote with ip (request().remoteAdress()) et s (choix.id)
+        }
+
+    	return redirect(routes.Application.showPollResult(qid));
+    }
+
+    public static Result showPollResult(Long qid){
+        return TODO;
     }
 
 }

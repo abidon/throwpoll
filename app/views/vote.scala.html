@@ -1,11 +1,8 @@
 @(question : Question)
 
 @main("Vote") {
-	@if(question == null) {
-		<p style="color: red">La question n'a pas pu être trouvée</p>	
-	} else {
-		<h1>@question.getName()</h1>
-		<form action="@routes.Application.voteForQuestion(question.id)" id="vote">
+	<h1>@question.getName()</h1>
+		<form action="@routes.Application.voteForQuestion(question.id)" id="vote" method="post">
 		@for(choix <- question.getChoixList()){
 			@if(question.isMultiple()) {
 				<input name="choosen" type="checkbox" value="@choix.getId()">@choix.getName()<br/>
@@ -15,7 +12,7 @@
 	}
 			<input type="submit" value="Voter!">
 	</form>
-	}
+
 	<script type="text/javascript">
 		$(function() {
 			$("form#vote").on('submit', function(event) {
