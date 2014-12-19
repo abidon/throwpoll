@@ -43,9 +43,8 @@ public class Question extends Model {
         // keep empty
     }
 
-    public Question(String name, List<Choix> choixList, boolean multiple){
+    public Question(String name, boolean multiple){
         this.name = name;
-        this.choixList = choixList;
         this.multiple = multiple;
     }
 
@@ -61,9 +60,8 @@ public class Question extends Model {
     	return this.multiple;
     }
 
-    public static Question getLast(){
-        int rowcount = find.findRowCount();
-        return find.all().get(rowcount - 1);
+    public void setChoixList(List<Choix> choixList){
+        this.choixList = choixList;
     }
 
 }

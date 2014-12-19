@@ -1,8 +1,9 @@
-package assets;
+package utils;
 
 import models.Choix;
 import models.Question;
 import play.data.validation.ValidationError;
+import play.mvc.Http;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +37,13 @@ public class QuestionForm {
         // trim line to remove empty ones
         List<String> cListTrimmed = new ArrayList<String>();
         for(String s : cList){
-            if(!s.isEmpty()){
+            if(!s.trim().isEmpty()){
                 cListTrimmed.add(s.trim());
             }
         }
         // from string to choix
         for(String s : cListTrimmed){
             Choix c = new Choix(s);
-            c.save();
             createdChoix.add(c);
         }
 
@@ -52,8 +52,13 @@ public class QuestionForm {
             return errors;
         }
         else{
-            Question q = new Question(name, createdChoix, multiple);
+            Question q = new Question(name, multiple);
             q.save();
+            for(Choix c : createdChoix){
+                c.setQuestion(q);
+                c.save();
+            }
+            Http.Context.current().args.put("qid", q.id);
         }
 
         return null;

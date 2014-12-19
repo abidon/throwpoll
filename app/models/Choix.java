@@ -15,9 +15,9 @@ import java.util.List;
 @Entity
 public class Choix extends Model {
     public static Finder<Long, Choix> find = new Finder<Long, Choix>(Long.class, Choix.class);
+
     @Id
     public Long id;
-
 
     public String name;
 

@@ -1,17 +1,11 @@
 package controllers;
 
-import models.Choix;
 import models.Question;
-import play.*;
 import play.data.Form;
-import play.data.validation.ValidationError;
 import play.mvc.*;
-import assets.QuestionForm;
+import utils.QuestionForm;
 
 import views.html.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Application extends Controller {
     private static final Form<QuestionForm> questionForm = Form.form(QuestionForm.class);
@@ -21,9 +15,9 @@ public class Application extends Controller {
         System.out.println(boundForm);
         QuestionForm q = boundForm.get();
         // get last question id
-        Question last = Question.getLast();
+        Long qid = (Long) Http.Context.current().args.get("qid");
 
-        return redirect(routes.Application.showVoteInterface(last.id));
+        return redirect(routes.Application.showVoteInterface(qid));
     }
     
     public static Result showPollCreator() {
