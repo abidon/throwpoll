@@ -39,6 +39,18 @@ public class Choix extends Model {
     {
     	return this.name;
     }
+
+    public  static Choix getChoix(Long id){
+        return find.byId(id);
+    }
+
+    public static boolean isValidId(Long cid){
+        return find.byId(cid) != null;
+    }
+
+    public static Integer getVoteCount(Choix c){
+        return c.votes.size();
+    }
     
     public void setQuestion(Question question)
     {

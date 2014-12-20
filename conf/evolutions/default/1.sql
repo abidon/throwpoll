@@ -18,21 +18,22 @@ create table question (
 ;
 
 create table vote (
-  ip                        varchar(255) not null,
-  constraint pk_vote primary key (ip))
+  id                        bigint not null,
+  ip                        varchar(255),
+  constraint pk_vote primary key (id))
 ;
 
 
 create table choix_vote (
   choix_id                       bigint not null,
-  vote_ip                        varchar(255) not null,
-  constraint pk_choix_vote primary key (choix_id, vote_ip))
+  vote_id                        bigint not null,
+  constraint pk_choix_vote primary key (choix_id, vote_id))
 ;
 
 create table vote_choix (
-  vote_ip                        varchar(255) not null,
+  vote_id                        bigint not null,
   choix_id                       bigint not null,
-  constraint pk_vote_choix primary key (vote_ip, choix_id))
+  constraint pk_vote_choix primary key (vote_id, choix_id))
 ;
 create sequence choix_seq;
 
@@ -47,9 +48,9 @@ create index ix_choix_question_1 on choix (question_id);
 
 alter table choix_vote add constraint fk_choix_vote_choix_01 foreign key (choix_id) references choix (id);
 
-alter table choix_vote add constraint fk_choix_vote_vote_02 foreign key (vote_ip) references vote (ip);
+alter table choix_vote add constraint fk_choix_vote_vote_02 foreign key (vote_id) references vote (id);
 
-alter table vote_choix add constraint fk_vote_choix_vote_01 foreign key (vote_ip) references vote (ip);
+alter table vote_choix add constraint fk_vote_choix_vote_01 foreign key (vote_id) references vote (id);
 
 alter table vote_choix add constraint fk_vote_choix_choix_02 foreign key (choix_id) references choix (id);
 

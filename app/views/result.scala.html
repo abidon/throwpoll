@@ -1,0 +1,11 @@
+@(question: Question)
+
+@main("Result"){
+  <h1>@question.getName</h1>
+  <ul>
+    @for(choix <- question.getChoixList()){
+      <li>@choix.getName() : @Choix.getVoteCount(choix)</li>
+    }
+
+  </ul>
+}

@@ -1,6 +1,8 @@
 package controllers;
 
+import models.Choix;
 import models.Question;
+import models.Vote;
 import play.data.Form;
 import play.mvc.*;
 import utils.QuestionForm;
@@ -13,9 +15,16 @@ public class Application extends Controller {
     private static final Form<QuestionForm> questionForm = Form.form(QuestionForm.class);
 
     public static Result saveNewPoll() {
+        System.out.println("Save before");
         Form<QuestionForm> boundForm = questionForm.bindFromRequest();
+        System.out.println("Save after bind");
         System.out.println(boundForm);
-        QuestionForm q = boundForm.get();
+        System.out.println("Save after get()");
+        if(boundForm.hasErrors()){
+            System.out.println("Json: ");
+            System.out.println(boundForm.errorsAsJson());
+            return badRequest(index.render(boundForm));
+        }
         // get last question id
         Long qid = (Long) Http.Context.current().args.get("qid");
 
@@ -43,14 +52,27 @@ public class Application extends Controller {
         for(String s: values.get("choosen")){
             System.out.println(s);
             // validate choix
-            // create Vote with ip (request().remoteAdress()) et s (choix.id)
+            if (Choix.isValidId(Long.valueOf(s))){
+                Choix c = Choix.getChoix(Long.valueOf(s));
+                if (Vote.exist(request().remoteAddress())){
+                    Vote v = Vote.getByIp(request().remoteAddress());
+                    v.addChoix(Choix.getChoix(Long.valueOf(s)));
+                    c.votes.add(v);
+                    v.update();
+                } else {
+                    Vote v = new Vote(request().remoteAddress(), Long.valueOf(s));
+                    c.votes.add(v);
+                    v.save();
+                }
+                c.update();
+            }
         }
 
     	return redirect(routes.Application.showPollResult(qid));
     }
 
     public static Result showPollResult(Long qid){
-        return TODO;
+        return ok(views.html.result.render(Question.find.byId(qid)));
     }
 
 }

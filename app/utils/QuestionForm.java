@@ -2,6 +2,8 @@ package utils;
 
 import models.Choix;
 import models.Question;
+import play.data.format.Formats.*;
+import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
 import play.mvc.Http;
 
@@ -13,8 +15,10 @@ import java.util.List;
  */
 public class QuestionForm {
 
+    @Constraints.Required
     public String name;
 
+    @Constraints.Required
     public String choix;
 
     public boolean multiple;
@@ -25,6 +29,7 @@ public class QuestionForm {
 
 
     public List<ValidationError> validate(){
+        System.out.println("Validate.");
         List<ValidationError> errors = new ArrayList<>();
         List<Choix> createdChoix = new ArrayList<>();
 
