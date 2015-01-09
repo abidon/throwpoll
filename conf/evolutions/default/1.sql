@@ -14,6 +14,7 @@ create table choix (
 create table question (
   id                        bigint not null,
   name                      varchar(255),
+  lol                       varchar(255),
   multiple                  boolean,
   constraint pk_question primary key (id))
 ;
@@ -25,12 +26,6 @@ create table vote (
   constraint pk_vote primary key (id))
 ;
 
-
-create table choix_vote (
-  choix_id                       bigint not null,
-  vote_id                        bigint not null,
-  constraint pk_choix_vote primary key (choix_id, vote_id))
-;
 
 create table vote_choix (
   vote_id                        bigint not null,
@@ -50,10 +45,6 @@ create index ix_vote_question_2 on vote (question_id);
 
 
 
-alter table choix_vote add constraint fk_choix_vote_choix_01 foreign key (choix_id) references choix (id);
-
-alter table choix_vote add constraint fk_choix_vote_vote_02 foreign key (vote_id) references vote (id);
-
 alter table vote_choix add constraint fk_vote_choix_vote_01 foreign key (vote_id) references vote (id);
 
 alter table vote_choix add constraint fk_vote_choix_choix_02 foreign key (choix_id) references choix (id);
@@ -62,13 +53,11 @@ alter table vote_choix add constraint fk_vote_choix_choix_02 foreign key (choix_
 
 drop table if exists choix cascade;
 
-drop table if exists choix_vote cascade;
+drop table if exists vote_choix cascade;
 
 drop table if exists question cascade;
 
 drop table if exists vote cascade;
-
-drop table if exists vote_choix cascade;
 
 drop sequence if exists choix_seq;
 

@@ -1,18 +1,12 @@
 package models;
 
-/**
- * Created by Timote on 19/12/14.
- */
 
 import java.util.ArrayList;
 
 import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -34,11 +28,14 @@ public class Question extends Model {
     @Constraints.Required
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    @OneToMany(mappedBy = "question")
+    @OrderBy
     private List<Choix> choixList = new ArrayList<Choix>();
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question")
     private List<Vote> votes = new ArrayList<Vote>();
+
+    private String lol;
 
     private boolean multiple;
 
@@ -68,6 +65,10 @@ public class Question extends Model {
         return choixList;
     }
 
+    public List<Choix> getChoixListOrdered(){
+        return Choix.getOrdered(this);
+    }
+
     public void setChoixList(List<Choix> choixList) {
         this.choixList = choixList;
     }
@@ -93,7 +94,7 @@ public class Question extends Model {
         for(Choix c : choixList){
             c.delete();
         }
-        for(Vote v :votes){
+        for(Vote v : votes){
             v.delete();
         }
         super.delete();

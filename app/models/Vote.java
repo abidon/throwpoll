@@ -7,9 +7,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Timote on 19/12/14.
- */
+
 @Entity
 public class Vote extends Model{
     public static Finder<Long, Vote> find = new Finder<Long, Vote>(Long.class, Vote.class);
@@ -33,7 +31,7 @@ public class Vote extends Model{
     }
 
     public static boolean alreadyVoted(String ip, Question question){
-        return find.where().eq("ip", ip).eq("question", question).findRowCount() == 0;
+        return find.where().eq("ip", ip).eq("question", question).findRowCount() != 0;
     }
 
     public void addChoix(Choix c){

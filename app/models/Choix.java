@@ -7,9 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-/**
- * Created by Timote on 19/12/14.
- */
+
 @Entity
 public class Choix extends Model {
     public static Finder<Long, Choix> find = new Finder<Long, Choix>(Long.class, Choix.class);
@@ -23,7 +21,7 @@ public class Choix extends Model {
     @ManyToOne
     public Question question;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "choixList", cascade = CascadeType.ALL)
     public List<Vote> votes;
 
     private int voteCount = 0;
@@ -38,6 +36,10 @@ public class Choix extends Model {
 
     public static boolean isValidId(Long id){
         return find.byId(id) != null;
+    }
+
+    public static List<Choix> getOrdered(Question question){
+        return find.where().eq("question", question).orderBy("id").findList();
     }
 
     public int getVoteCount(){

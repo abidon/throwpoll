@@ -3,7 +3,7 @@
 @main("Result"){
   <h1>@question.getName()</h1>
   <ul>
-    @for(choix <- question.getChoixList()){
+    @for(choix <- question.getChoixListOrdered()){
       <li>@choix.getName() : @choix.getVoteCount()</li>
     }
 

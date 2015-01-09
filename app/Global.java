@@ -12,9 +12,10 @@ public class Global extends GlobalSettings {
 
 	@Override
 	public void onStart(Application app) {
-
 		if (Question.find.findRowCount() > 0) {
-			Ebean.delete(Question.find.all());
+			for(Question question: Question.find.all()){
+				question.delete();
+			}
 		}
 	}
 }

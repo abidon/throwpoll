@@ -41,7 +41,7 @@ public class Application extends Controller {
         if (question == null){
             return notFound("question not found");
         }
-    	
+
     	return ok(views.html.vote.render(q));
 
     }
@@ -68,7 +68,6 @@ public class Application extends Controller {
                 choix_votes.add(v);
                 c.setVotes(choix_votes);
                 v.save();
-                c.update();
 
                 List<Vote> question_votes = question.getVotes();
                 question_votes.add(v);
