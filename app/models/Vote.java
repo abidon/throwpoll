@@ -33,7 +33,7 @@ public class Vote extends Model{
     }
 
     public static boolean alreadyVoted(String ip, Question question){
-        return find.where().eq("ip", ip).eq("question", question).findRowCount() == 0;
+        return find.where().eq("ip", ip).eq("question", question).findRowCount() != 0;
     }
 
     public void addChoix(Choix c){
