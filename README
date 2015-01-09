@@ -1,4 +1,14 @@
-This is your new Play application
-=================================
+A poll web app with Play Framework
+===
 
-This file will be packaged with your application, when using `activator dist`.
+*Java required*
+
+To start app: (in the project directory)
+```bash
+./activator run
+```
+
+To start test: (in the project directory)
+```bash
+./activator test
+```

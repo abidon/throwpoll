@@ -38,26 +38,30 @@ create sequence question_seq;
 
 create sequence vote_seq;
 
-alter table choix add constraint fk_choix_question_1 foreign key (question_id) references question (id);
+alter table choix add constraint fk_choix_question_1 foreign key (question_id) references question (id) on delete restrict on update restrict;
 create index ix_choix_question_1 on choix (question_id);
-alter table vote add constraint fk_vote_question_2 foreign key (question_id) references question (id);
+alter table vote add constraint fk_vote_question_2 foreign key (question_id) references question (id) on delete restrict on update restrict;
 create index ix_vote_question_2 on vote (question_id);
 
 
 
-alter table vote_choix add constraint fk_vote_choix_vote_01 foreign key (vote_id) references vote (id);
+alter table vote_choix add constraint fk_vote_choix_vote_01 foreign key (vote_id) references vote (id) on delete restrict on update restrict;
 
-alter table vote_choix add constraint fk_vote_choix_choix_02 foreign key (choix_id) references choix (id);
+alter table vote_choix add constraint fk_vote_choix_choix_02 foreign key (choix_id) references choix (id) on delete restrict on update restrict;
 
 # --- !Downs
 
-drop table if exists choix cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists vote_choix cascade;
+drop table if exists choix;
 
-drop table if exists question cascade;
+drop table if exists vote_choix;
 
-drop table if exists vote cascade;
+drop table if exists question;
+
+drop table if exists vote;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists choix_seq;
 
