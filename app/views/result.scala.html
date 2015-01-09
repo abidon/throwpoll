@@ -1,11 +1,18 @@
 @(question: Question)
 
 @main("Result"){
-  <h1>@question.getName()</h1>
-  <ul>
-    @for(choix <- question.getChoixListOrdered()){
-      <li>@choix.getName() : @choix.getVoteCount()</li>
-    }
 
-  </ul>
+  <h1>@question.getName()</h1>
+  <table class="table">
+      <tr>
+        <td>Nom</td>
+        <td>Count</td>
+      </tr>
+  @for(choix <- question.getChoixList()){
+    <tr>
+      <td>@choix.getName()</td>
+      <td>@choix.getVoteCount()</td>
+    </tr>
+  }
+  </table>
 }

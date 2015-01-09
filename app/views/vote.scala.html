@@ -3,11 +3,15 @@
 @main("Vote") {
 	<h1>@question.getName()</h1>
 		<form action="@routes.Application.voteForQuestion(question.getId())" id="vote" method="post">
-		@for(choix <- question.getChoixListOrdered()){
+		@for(choix <- question.getChoixList()){
 			@if(question.isMultiple()) {
-				<input name="choosen" type="checkbox" value="@choix.getId()">@choix.getName()<br/>
+				<label>
+					<input name="choosen" type="checkbox" value="@choix.getId()">@choix.getName()<br/>
+				</label>
 			} else {
-				<input name="choosen" type="radio" value="@choix.getId()">@choix.getName()<br/>
+				<label>
+					<input name="choosen" type="radio" value="@choix.getId()">@choix.getName()<br/>	
+				</label>
 			}
 	}
 			<input type="submit" value="Voter!">
@@ -22,7 +26,7 @@
 				});
 				if (votes.length == 0)
 				{
-					alert("T'as pas encore voté connard!");
+					alert("Vous n'avez pas encore choisi de réponse!");
 					event.preventDefault();
 				}
 			});

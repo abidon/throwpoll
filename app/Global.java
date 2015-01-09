@@ -5,9 +5,7 @@ import models.Question;
 import play.Application;
 import play.GlobalSettings;
 
-/**
- * Created by Timote on 19/12/14.
- */
+
 public class Global extends GlobalSettings {
 
 	@Override
