@@ -63,7 +63,7 @@ public class QuestionForm {
                 c.setQuestion(q);
                 c.save();
             }
-            Http.Context.current().args.put("qid", q.id);
+            Http.Context.current().args.put("qid", q.getId());
         }
 
         return null;

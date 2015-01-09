@@ -17,19 +17,23 @@ public class Vote extends Model{
     @Id
     private Long id;
 
-
     private String ip;
 
     @ManyToMany
     private List<Choix> choixList = new ArrayList<Choix>();
 
-    public Vote(String ipAdress, Long cid){
+    @ManyToOne
+    private Question question;
+
+
+    public Vote(String ipAdress, Choix choix, Question question){
         this.ip = ipAdress;
-        this.choixList.add(Choix.getChoix(cid));
+        this.choixList.add(choix);
+        this.question = question;
     }
 
-    public static boolean exist(String ipAdress){
-        return find.where().eq("ip", ipAdress).findRowCount() == 1 ;
+    public static boolean alreadyVoted(String ip, Question question){
+        return find.where().eq("ip", ip).eq("question", question).findRowCount() == 0;
     }
 
     public void addChoix(Choix c){

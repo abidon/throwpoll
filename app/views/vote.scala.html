@@ -2,7 +2,7 @@
 
 @main("Vote") {
 	<h1>@question.getName()</h1>
-		<form action="@routes.Application.voteForQuestion(question.id)" id="vote" method="post">
+		<form action="@routes.Application.voteForQuestion(question.getId())" id="vote" method="post">
 		@for(choix <- question.getChoixList()){
 			@if(question.isMultiple()) {
 				<input name="choosen" type="checkbox" value="@choix.getId()">@choix.getName()<br/>

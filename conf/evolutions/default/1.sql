@@ -7,6 +7,7 @@ create table choix (
   id                        bigint not null,
   name                      varchar(255),
   question_id               bigint,
+  vote_count                integer,
   constraint pk_choix primary key (id))
 ;
 
@@ -20,6 +21,7 @@ create table question (
 create table vote (
   id                        bigint not null,
   ip                        varchar(255),
+  question_id               bigint,
   constraint pk_vote primary key (id))
 ;
 
@@ -43,6 +45,8 @@ create sequence vote_seq;
 
 alter table choix add constraint fk_choix_question_1 foreign key (question_id) references question (id);
 create index ix_choix_question_1 on choix (question_id);
+alter table vote add constraint fk_vote_question_2 foreign key (question_id) references question (id);
+create index ix_vote_question_2 on vote (question_id);
 
 
 

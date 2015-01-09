@@ -29,16 +29,18 @@ public class Question extends Model {
 	public static Finder<Long, Question> find = new Finder<Long, Question>(Long.class, Question.class);
 	
     @Id
-    public Long id;
+    private Long id;
 
     @Constraints.Required
-    public String name;
+    private String name;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "question")
-    public List<Choix> choixList = new ArrayList<Choix>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    private List<Choix> choixList = new ArrayList<Choix>();
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Vote> votes = new ArrayList<Vote>();
 
-    public boolean multiple;
+    private boolean multiple;
 
     public Question(){
         // keep empty
@@ -49,20 +51,53 @@ public class Question extends Model {
         this.multiple = multiple;
     }
 
-    public String getName() {
-    	return this.name;
-    }
-    
-    public List<Choix> getChoixList() {
-    	return this.choixList;
-    }
-    
-    public boolean isMultiple() {
-    	return this.multiple;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setChoixList(List<Choix> choixList){
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Choix> getChoixList() {
+        return choixList;
+    }
+
+    public void setChoixList(List<Choix> choixList) {
         this.choixList = choixList;
     }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public boolean isMultiple() {
+        return multiple;
+    }
+
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
+    }
+
+    @Override
+    public void delete(){
+        for(Choix c : choixList){
+            c.delete();
+        }
+        for(Vote v :votes){
+            v.delete();
+        }
+        super.delete();
+    }
+
 
 }

@@ -17,6 +17,7 @@ public class Choix extends Model {
     @Id
     public Long id;
 
+    @Constraints.Required
     public String name;
 
     @ManyToOne
@@ -25,36 +26,55 @@ public class Choix extends Model {
     @ManyToMany
     public List<Vote> votes;
 
+    private int voteCount = 0;
+
+    public Choix(){
+        // keep empty
+    }
+
     public Choix(String name){
         this.name = name;
     }
 
-    
-    public Long getId()
-    {
-    	return this.id;
-    }
-    
-    public String getName()
-    {
-    	return this.name;
+    public static boolean isValidId(Long id){
+        return find.byId(id) != null;
     }
 
-    public  static Choix getChoix(Long id){
-        return find.byId(id);
+    public int getVoteCount(){
+        this.setVoteCount(this.votes.size());
+        return this.voteCount;
     }
 
-    public static boolean isValidId(Long cid){
-        return find.byId(cid) != null;
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
     }
 
-    public static Integer getVoteCount(Choix c){
-        return c.votes.size();
-    }
-    
-    public void setQuestion(Question question)
-    {
-    	this.question = question;
+    public Long getId(){
+        return this.id;
     }
 
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public List<Vote> getVotes() {
+        return this.votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
 }
