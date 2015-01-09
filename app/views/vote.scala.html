@@ -3,12 +3,22 @@
 @main("Vote") {
 	<h1>@question.getName()</h1>
 		<form action="@routes.Application.voteForQuestion(question.getId())" id="vote" method="post">
+			@if(question.isMultiple()) {
+				<div class="checkbox">
+			else {
+				<div class="radio">
+			}
 		@for(choix <- question.getChoixList()){
 			@if(question.isMultiple()) {
-				<input name="choosen" type="checkbox" value="@choix.getId()">@choix.getName()<br/>
+				<label>
+					<input name="choosen" type="checkbox" value="@choix.getId()">@choix.getName()<br/>
+				</label>
 			} else {
-				<input name="choosen" type="radio" value="@choix.getId()">@choix.getName()<br/>
+				<label>
+					<input name="choosen" type="radio" value="@choix.getId()">@choix.getName()<br/>	
+				</label>
 			}
+			</div>
 	}
 			<input type="submit" value="Voter!">
 	</form>
