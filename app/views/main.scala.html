@@ -7,15 +7,51 @@
         <title>@title</title>
 		
 		<!-- Bootstrap -->
-    	<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 		
 		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     	<!-- Include all compiled plugins (below), or include individual files as needed -->
-    	<script src="js/bootstrap.min.js"></script>
+    	<script src="/assets/js/bootstrap.min.js"></script>
+        <style>
+          .myBox {
+            margin-top: 30px;
+            background-color: #f7f052;
+            background-color: rgba(168, 69, 46, 0.5);
+            border: solid 1px #aaa;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            
+            padding-top: 2em;
+            padding-bottom: 2em;
+            
+            padding-left: 4em;
+            padding-right: 4em;
+            
+            -moz-box-shadow: 0px 0px 20px 3px #656565;
+            -webkit-box-shadow: 0px 0px 20px 3px #656565;
+            -o-box-shadow: 0px 0px 20px 3px #656565;
+            box-shadow: 0px 0px 20px 3px #656565;
+            filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=20);
+          }
+        </style>
     </head>
-    <body>
+    <body style="margin-top: 70px; background-attachment: scroll; background-clip: border-box; background-image: url(https://static.licdn.com/scds/common/u/images/themes/katy/textures/texture_grain_200x200_v2.png); background-origin: padding-box; background-size: auto;">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ThrowPoll</a>
+          </div>
+        </div>
+      </nav>
+      
         @content
     </body>
 </html>
